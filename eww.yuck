@@ -1,0 +1,70 @@
+(defwindow powermenu
+	:monitor 0
+	:stacking "bg"
+	:windowtype "normal"
+	:wm-ignore true
+	:exclusive true
+	:geometry (geometry
+		:width "50px"
+		:height "1%"
+		:anchor "top center"
+	)
+	(container))
+
+(defpoll time :interval "5s"
+	:inital `date +'{"hour":"%H","min":"%M"}'`
+	`date +'{"hour":"%H","min":"%M"}'`)
+
+(defpoll net :interval "100s"
+	:inital `N/A`
+		`nmcli -t -f SIGNAL, ACTIVE device wifi \ | awk -F':' '{if($2="yes")print$1'`)
+
+(defwidget container []
+	(box
+		:class "wind"
+		:halign "end"
+		(clock)
+		(battery)
+		(wifi :strength net :offline "| 󰤭  |"
+			:excellent "| 󰤨  |"
+			:good "| 󰤥  |"
+			:okay "| 󰤢  |"
+			:slow "| 󰤟  |"
+		)
+	)
+)
+(defwidget clock []
+	(box :class "clock"
+	:space-evenly false
+	:spacing 8
+	:halign "end"
+		(label :text "${time.hour}:${time.min} |")
+	)
+)
+
+(defwidget battery []
+	(box :class "battery"
+	:space-evenly false
+	:spacing 8
+	:halign "end"
+		(label
+			:text "| 󰁹 ${EWW_BATTERY.BAT0.capacity}% |" 
+			)
+	)
+)
+
+(defwidget wifi [strength offline excellent good okay slow]
+	(box :class "wifi"
+	:space-evenly false
+	:spacing 8
+	:halign "start"
+		(label
+			:text {strength == "" ? offline : 
+			strength < 26 ? slow:
+			strength < 51 ? okay:
+			strength < 76 ? good : excellent}
+		)
+	)
+)
+
+
