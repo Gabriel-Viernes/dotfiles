@@ -1,0 +1,33 @@
+#workspaces button.active {
+	background-color:blue;
+	color: white;
+	border-radius: 0px;
+}
+#cpu {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+#memory {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+#temperature {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+#clock {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+#network {
+	margin-left: .5em;
+	margin-right: .5em;
+}
+#pulseaudio {
+	margin-left:.5em;
+	margin-right:.5em;
+}
+#idle_inhibitor {
+	margin-left: .5em;
+	margin-right: .5em;
+}
