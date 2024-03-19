@@ -63,9 +63,40 @@ require('lazy').setup({
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
         dependencies = { 'nvim-lua/plenary.nvim'}
-    }
+    },
+    {
+        'williamboman/mason.nvim',
+        config = function()
+            local configs = require('mason')
+            configs.setup()
+        end
+    },
+    {
+        'williamboman/mason-lspconfig.nvim',
+        config = function()
+            local configs = require('mason-lspconfig')
+
+	    configs.setup ({
+                ensure_installed = { 'csharp_ls', 'cssls', 'html', 'jsonls', 'tsserver', 'lua_ls', 'marksman'}
+            })
+	end
+    },
+    {
+        'neovim/nvim-lspconfig',
+        config = function()
+            require('lspconfig').cssls.setup{}
+            require('lspconfig').csharp_ls.setup{}
+            require('lspconfig').html.setup{}
+            require('lspconfig').jsonls.setup{}
+            require('lspconfig').tsserver.setup{}
+            require('lspconfig').lua_ls.setup{}
+            require('lspconfig').marksman.setup{}
+        end
+   }
 
 })
+
+
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
