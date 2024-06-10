@@ -1,0 +1,41 @@
+(defpoll time :interval "1s"
+    `date +%H:%M:%S`)
+
+(defwidget clock[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :class "clock"
+         "${time}"))
+
+(defwidget battery[]
+    (box :orientation "horizontal"
+         :valign "center"
+         "${EWW_BATTERY.BAT0.capacity}%┃${EWW_BATTERY.BAT0.status}"))
+
+(defwidget stackGroup[]
+    (box :valign "center"
+         :orientation "vertical"
+     (clock)))
+
+(defwindow battery
+            :monitor 0
+            :geometry (geometry :x "0%"
+                                :y "110px"
+                                :anchor "top center")
+            :stacking "bg"
+    (battery))
+
+(defwindow main
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "12px"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "bg"
+  (stackGroup))
+
+
+
+
+
+
