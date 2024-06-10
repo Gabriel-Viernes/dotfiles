@@ -35,10 +35,9 @@ require('lazy').setup({
         priority = 1000,
         config = function()
             require("everforest").setup({
-                background = "hard"
+                background = "medium"
             })
 		    vim.cmd([[colorscheme everforest]])
-
         end,
     },
     {
