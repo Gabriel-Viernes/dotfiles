@@ -1,6 +1,9 @@
 (defpoll time :interval "1s"
     `date +%H:%M:%S`)
 
+(defpoll date :interval "20s"
+    `date "+%A, %b %d"`)
+
 (defpoll smallTime :interval "1s"
     `date +%H:%M`)
 
@@ -19,7 +22,11 @@
          :class "clock"
          "${EWW_BATTERY.BAT0.capacity}%┃${smallTime}┃${activeWorkspace}"))
 
-
+(defwidget date[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :class "date"
+         "${date}"))
 
 (defwidget battery[]
     (box :orientation "horizontal"
@@ -31,20 +38,31 @@
          :orientation "vertical"
      (clock)))
 
+(defwindow date
+            :monitor 0
+            :geometry (geometry :x "5%"
+                                :y "35%"
+                                :width "40%"
+                                :heigth "30px"
+                                :anchor "top right")
+            :stacking "bg"
+            (date))
+
 (defwindow battery
             :monitor 0
             :geometry (geometry :x "0%"
-                                :y "110px"
-                                :anchor "top center")
+                                :y "0%"
+                                :anchor "bottom right")
             :stacking "bg"
     (battery))
 
 (defwindow main
            :monitor 0
-           :geometry (geometry :x "0%"
-                               :y "12px"
+           :geometry (geometry :x "15%"
+                               :y "58%"
+                               :width "40%"
                                :height "30px"
-                               :anchor "top center")
+                               :anchor "top left")
            :stacking "bg"
   (stackGroup))
 

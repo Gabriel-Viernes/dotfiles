@@ -63,7 +63,7 @@ require('lazy').setup({
             local configs = require('mason-lspconfig')
 
 	    configs.setup ({
-                ensure_installed = { 'csharp_ls', 'cssls', 'html', 'jsonls', 'lua_ls', 'marksman', 'yaml'}
+                ensure_installed = { 'csharp_ls', 'cssls', 'html', 'jsonls', 'tsserver', 'lua_ls', 'marksman', 'biome', 'yamlls'}
             })
 	end
     },
