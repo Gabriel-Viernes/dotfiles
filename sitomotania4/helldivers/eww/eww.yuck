@@ -1,13 +1,13 @@
 (defpoll time :interval "1s"
     `date +%H:%M:%S`)
 
-(defpoll date :interval "20s"
+(defpoll date :interval "24h"
     `date "+%A, %b %d"`)
 
 (defpoll smallTime :interval "1s"
     `date +%H:%M`)
 
-(defpoll activeWorkspace :interval ".5s"
+(defpoll activeWorkspace :interval "1s"
     `hyprctl activeworkspace -j | jq ".id"`)
 
 (defwidget clock[]

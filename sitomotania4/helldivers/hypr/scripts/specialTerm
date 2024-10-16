@@ -1,0 +1,18 @@
+#echo $(node ~/.config/hypr/scripts/parseHyprctl.js "$(hyprctl clients -j)") > ~/.config/hypr/scripts/var
+#echo $(hyprctl clients -j | jq '.[length-1].pid') > ~/.config/hypr/scripts/var; 
+
+
+#touch ~/.config/hypr/scripts/weball
+#
+#
+specialTermPID=$(cat .config/hypr/scripts/specialTermPID)
+$(kill $specialTermPID)
+if [ $(echo $?) -eq 0 ]; then
+    exit 1
+else
+    sh -c 'echo $$ > ~/.config/hypr/scripts/specialTermPID; exec kitty'
+fi
+#sh -c 'echo $$ > ~/.config/hypr/scripts/specialTermPID; exec kitty' 
+
+
+
