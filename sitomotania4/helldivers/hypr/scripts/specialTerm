@@ -5,12 +5,16 @@
 #touch ~/.config/hypr/scripts/weball
 #
 #
-specialTermPID=$(cat .config/hypr/scripts/specialTermPID)
+specialTermPID=$(cat ~/.config/hypr/scripts/specialTermPID)
 $(kill $specialTermPID)
 if [ $(echo $?) -eq 0 ]; then
     exit 1
 else
     sh -c 'echo $$ > ~/.config/hypr/scripts/specialTermPID; exec kitty'
+    specialTermPID=$(cat ~/.config/hypr/scripts/specialTermPID)
+    hyprctl setprop pid:$specialTermPID dimaround on
+    hyprctl setprop pid:$specialTermPID opaque on
+
 fi
 #sh -c 'echo $$ > ~/.config/hypr/scripts/specialTermPID; exec kitty' 
 
