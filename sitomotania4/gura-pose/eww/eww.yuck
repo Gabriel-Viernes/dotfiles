@@ -1,0 +1,106 @@
+;import windows
+(include "./windows/verticalDate.yuck")
+(include "./windows/desktopClock.yuck")
+(include "./windows/workspaceStack.yuck")
+
+(defpoll time :interval "1s"
+    `date +%H:%M:%S`)
+
+(defpoll activeWorkspace :interval "0.2s"
+    `hyprctl activeworkspace -j | jq ".id"`)
+
+(deflisten activeWorkspaces :initial "[69, false, false, false, false, false, false, false, false, false, false]"
+    `node ./scripts/currentActiveWorkspaces.js`)
+
+(deflisten isActiveWindow :initial "false"
+    `./scripts/isActiveWindow`)
+
+(defpoll hourLeft :interval "1s"
+    `date +%H | cut -c 1`)
+
+(defpoll hourRight :interval "1s"
+    `date +%H | cut -c 2`)
+
+(defpoll minuteLeft :interval "1s"
+    `date +%M | cut -c 1`)
+
+(defpoll minuteRight :interval "1s"
+    `date +%M | cut -c 2`)
+
+(defwidget workspace[]
+    (box
+        :class "workspace"
+        :valign "center"
+        :halign "center"
+        :visible {isActiveWindow ? "false" : "true"}
+        {activeWorkspaces[0]}))
+
+(defwidget verticalClockLeft[]
+    (box 
+        :orientation "vertical"
+        :valign "center"
+        :class "vClockLeft"
+        "${hourLeft}""${hourRight}"))
+
+(defwidget verticalClockRight[]
+    (box
+        :orientation "vertical"
+        :valign "center"
+        :class "vClockRight"
+        "${minuteLeft}""${minuteRight}"))
+
+(defwidget verticalClockCenter[]
+    (box 
+        :halign "center" 
+        :class "vClockCenter"
+        ":"))
+
+(defwidget verticalClock[]
+    (box 
+        :orientation "horizontal"
+        :halign "center"
+        :class "verticalClock"
+        :visible {isActiveWindow ? "false" : "true"}
+        (verticalClockLeft)(verticalClockCenter)(verticalClockRight)))
+
+(defwidget batteryPercent[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :halign "center"
+         :class "batteryPercent"
+         :visible {isActiveWindow ? "false" : "true"}
+         "${round(EWW_BATTERY.BAT0.capacity/2 + EWW_BATTERY.BAT1.capacity/2, 0)}%"))
+
+
+(defwindow batteryPercent
+        :monitor 0
+        :geometry
+            (geometry
+                :x "4.3%"
+                :anchor "top right"
+                :stacking "overlay")
+        (batteryPercent))
+
+(defwindow workspace
+    :monitor 0
+    :geometry
+        (geometry
+            :anchor "top right")
+    :stacking "overlay"
+    :exclusive "true"
+    (workspace))
+
+(defwindow verticalClock
+    :monitor 0
+    :geometry
+        (geometry 
+            :x "43px"
+            :anchor "top right")
+    :stacking "overlay"
+            
+    (verticalClock))
+
+
+
+
+

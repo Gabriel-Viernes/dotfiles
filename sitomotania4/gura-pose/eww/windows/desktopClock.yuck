@@ -1,0 +1,15 @@
+(defwidget clock[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :class "clock"
+         "${time}"))
+
+(defwindow desktopClock
+        :monitor 0
+        :geometry
+            (geometry
+                :x "13.7%"
+                :y "9.8%"
+                :anchor "top right")
+        :stacking "bg"
+        (clock))

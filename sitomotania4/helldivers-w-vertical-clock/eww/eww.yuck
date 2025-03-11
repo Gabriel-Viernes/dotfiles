@@ -1,0 +1,179 @@
+(defpoll time :interval "1s"
+    `date +%H:%M:%S`)
+
+(defpoll date :interval "24h"
+    `date "+%A, %b %d"`)
+
+(defpoll smallTime :interval "1s"
+    `date +%H:%M`)
+
+(defpoll activeWorkspace :interval "1s"
+    `hyprctl activeworkspace -j | jq ".id"`)
+
+(defpoll hourLeft :interval "1s"
+    `date +%H | cut -c 1`)
+
+(defpoll hourRight :interval "1s"
+    `date +%H | cut -c 2`)
+
+(defpoll minuteLeft :interval "1s"
+    `date +%M | cut -c 1`)
+
+(defpoll minuteRight :interval "1s"
+    `date +%M | cut -c 2`)
+
+(defwidget workspace[]
+    (box
+        :valign "center"
+        :halign "center"
+        :class "workspace"
+        "${activeWorkspace}"))
+(defwidget smallTime[]
+    (box
+        :valign "center"
+        :halign "center"
+        :class "smallTime"
+        "${smallTime}"))
+
+(defwidget verticalClockLeft[]
+    (box 
+        :orientation "vertical"
+        :valign "center"
+        :class "vClockLeft"
+        "${hourLeft}""${hourRight}"))
+
+(defwidget verticalClockRight[]
+    (box
+        :orientation "vertical"
+        :valign "center"
+        :class "vClockRight"
+        "${minuteLeft}""${minuteRight}"))
+
+(defwidget verticalClockCenter[]
+    (box 
+        :halign "center" 
+        :class "vClockCenter"
+        ":"))
+
+(defwidget verticalClock[]
+    (box 
+        :orientation "horizontal"
+        :halign "center"
+        :class "verticalClock"
+        (verticalClockLeft)(verticalClockCenter)(verticalClockRight)))
+
+
+(defwidget clock[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :class "clock"
+         "${time}"))
+
+(defwidget smallClock[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :class "clock"
+         "${EWW_BATTERY.BAT0.capacity}%┃${smallTime}┃${activeWorkspace}"))
+
+(defwidget date[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :class "date"
+         "${date}"))
+
+(defwidget battery[]
+    (box :orientation "horizontal"
+         :valign "center"
+         "${EWW_BATTERY.BAT0.capacity}%┃${EWW_BATTERY.BAT0.status}"))
+
+(defwidget batteryPercent[]
+    (box :orientation "horizontal"
+         :valign "center"
+         :halign "center"
+         :class "batteryPercent"
+         "${EWW_BATTERY.BAT0.capacity}%"))
+
+
+(defwidget stackGroup[]
+    (box :valign "center"
+         :orientation "vertical"
+     (clock)))
+
+(defwindow batteryPercent
+        :monitor 0
+        :geometry
+            (geometry
+                :x "4.3%"
+                :anchor "top right"
+                :stacking "fg")
+        (batteryPercent))
+
+(defwindow workspace
+    :monitor 0
+    :geometry
+        (geometry
+            :anchor "top right"
+            :stacking "fg")
+    (workspace))
+
+(defwindow smallClock
+    :monitor 0 
+    :geometry
+        (geometry
+            :x "50px"
+            :anchor "top right"
+            :stacking "fg")
+        (smallClock))
+
+(defwindow verticalClock
+    :monitor 0
+    :geometry
+        (geometry 
+            :x "43px"
+            :anchor "top right")
+            :stacking "fg"
+    (verticalClock))
+
+(defwindow date
+            :monitor 0
+            :geometry (geometry :x "5%"
+                                :y "35%"
+                                :width "40%"
+                                :heigth "30px"
+                                :anchor "top right")
+            :stacking "bg"
+            (date))
+
+(defwindow battery
+            :monitor 0
+            :geometry (geometry :x "0%"
+                                :y "0%"
+                                :anchor "bottom right")
+            :stacking "bg"
+    (battery))
+
+(defwindow main
+           :monitor 0
+           :geometry (geometry :x "15%"
+                               :y "58%"
+                               :width "40%"
+                               :height "30px"
+                               :anchor "top left")
+           :stacking "bg"
+  (stackGroup))
+
+(defwindow smallStack
+            :monitor 0
+            :geometry (geometry :x "10px"
+                                :y "13px"
+                                :height "10px"
+                                :anchor "top right")
+
+            :stacking "fg"
+    (smallClock))
+
+
+
+
+
+

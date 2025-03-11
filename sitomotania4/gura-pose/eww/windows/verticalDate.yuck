@@ -1,0 +1,40 @@
+(defpoll dayOfWeekT :interval "1h"
+    `date +%a | cut -c 1`)
+
+(defpoll dayOfWeekM :interval "1h"
+    `date +%a | cut -c 2`)
+
+(defpoll dayOfWeekB :interval "1h"
+    `date +%a | cut -c 3`)
+
+(defpoll monthT :interval "1h"
+    `date +%b | cut -c 1`)
+
+(defpoll monthM :interval "1h"
+    `date +%b | cut -c 2`)
+
+(defpoll monthB :interval "1h"
+    `date +%b | cut -c 3`)
+
+(defpoll dayT :interval "1h"
+    `date +%d | cut -c 1`)
+
+(defpoll dayB :interval "1h"
+    `date +%d | cut -c 2`)
+
+(defwidget verticalDate[]
+    (box
+        :orientation "vertical"
+        :valign "start"
+        :class "verticalDate"
+        "${dayOfWeekT}""${dayOfWeekM}""${dayOfWeekB}""${monthT}""${monthM}""${monthB}""${dayT}""${dayB}"))
+
+(defwindow verticalDate
+    :monitor 0
+    :geometry
+        (geometry
+            :x "11.3%"
+            :y "9.8%"
+            :anchor "top right")
+                :stacking "bg"
+    (verticalDate))

@@ -1,0 +1,78 @@
+* {
+  all: unset;
+}
+
+
+.main {
+  color: #FFFFFF;
+  font-family: "FS Sinclair";
+  font-size: 150px;
+  text-shadow: 1px 1px 10px white;
+ }
+.date {
+  color: #FFFFFF;
+  font-family: "FS Sinclair";
+  font-size: 75px;
+  text-shadow: 1px 1px 10px white;
+
+}
+
+.batteryPercent {
+  font-family: "VCR OSD Mono";
+  font-size: 20px;
+  color: #000000;
+  background-color: #FFFFFF;
+  margin: .3em .3em .3em .3em;
+  border-radius: 0px 0px 0px 5px;
+}
+
+.vClockLeft {
+  font-size:20px;
+  margin: 0px 0px 2px 2px; 
+}
+
+.vClockCenter {
+  margin: 0px -5px 2px -5px;
+  font-size: 35px;
+}
+
+.vClockRight {
+  font-size: 20px;
+  margin: 0px 0px 2px -5px;
+}
+
+.verticalClock {
+  color: #000000;
+  background-color: #FFFFFF;
+  font-family: "VCR OSD Mono";
+  border-radius: 0px 0px 0px 5px;
+}
+
+.workspace {
+  color: #000000;
+  background-color: #FFFFFF;
+  font-family: "VCR OSD Mono";
+  font-size: 40px;
+  margin: 0px 10px 8px 10px;
+  border-radius: 0px 0px 0px 4px;
+
+}
+
+.clock {
+    padding: 0px 0px 3px 0px;
+}
+
+.smallClock {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    color: #000000;
+    background-color: #FFFFFF;
+    font-family: "VCR OSD Mono";
+    border: solid 5px #FFFFFF;
+}
+
+.battery {
+    font-family: "FS Sinclair";
+    padding: 0px 3px 0px 3px;
+    font-size:20px;
+}

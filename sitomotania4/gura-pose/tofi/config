@@ -1,0 +1,23 @@
+font = "Hurmit Nerd Font Mono"
+font-size = 14
+text-color = #777491
+text-cursor = true
+
+selection-match-color = #43A7DB
+selection-color = #FBC3B2
+prompt-text = ""
+placeholder-text = "run..."
+
+
+anchor = "bottom"
+
+
+background-color = #EBE2D3
+
+placeholder-color = #43A7DB
+outline-color = #777491
+outline-width = 4
+border-width = 0
+
+width = 25%
+height = 25%

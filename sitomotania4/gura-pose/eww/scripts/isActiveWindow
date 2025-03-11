@@ -1,0 +1,9 @@
+while :
+    do
+        if [[ $(hyprctl activewindow) = "Invalid" ]]; then
+            echo true
+        else
+            echo false
+        fi
+        sleep 0.5
+    done
